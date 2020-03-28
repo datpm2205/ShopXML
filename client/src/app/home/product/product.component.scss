@@ -1,0 +1,25 @@
+.product-container {
+    background-color: #e9ecef;
+    padding: 10px;
+}
+
+.title_name {
+    color: #0083c0;
+    margin-top: 5px;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.price {
+    color: #424242;
+}
+
+.buy-button {
+    width: 100%;
+}
+
+.info-container {
+    cursor: pointer;
+}

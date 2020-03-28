@@ -20,8 +20,10 @@
         [pageSizeOptions]="pageSizeOptions" showFirstLastButtons
         (page)="paginatorBottom.pageSize = $event.pageSize; paginatorBottom.pageIndex = $event.pageIndex; onPageEvent($event)">
     </mat-paginator>
-    <div>
-
+    <div class="product-container">
+        <div *ngFor="let p of products">
+            <app-product [name]="p.name" [imageUrl]="p.image" [price]="p.price"></app-product>
+        </div>
     </div>
     <mat-paginator #paginatorBottom [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"
         [pageSizeOptions]="pageSizeOptions" showFirstLastButtons

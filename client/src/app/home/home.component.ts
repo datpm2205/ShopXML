@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   length = 0;
   pageSize = 25;
   pageIndex = 0;
-  pageSizeOptions: number[] = [25, 50, 100, 200];
+  pageSizeOptions: number[] = [25, 50, 100];
   modeDisplay = 'latest';
   viewModeOption: SelectOption[] = [
     {
@@ -91,16 +91,23 @@ export class HomeComponent implements OnInit {
     this.modeDisplay = xmlDoc.getElementsByTagName("sortMode")[0].childNodes[0].nodeValue;
 
     const listProductNode: any = xmlDoc.getElementsByTagName("products")[0].childNodes;
+    this.products = [];
     for (let i = 0; i < listProductNode.length; i++) {
       const id = listProductNode[i].getElementsByTagName("id")[0].childNodes[0].nodeValue;
       const name = listProductNode[i].getElementsByTagName("name")[0].childNodes[0].nodeValue;
       const image = listProductNode[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
-      const price = listProductNode[i].getElementsByTagName("price")[0].childNodes[0].nodeValue;
+      const price = this.processPrice(listProductNode[i].getElementsByTagName("price")[0].childNodes[0].nodeValue);
       const description = listProductNode[i].getElementsByTagName("description")[0].childNodes[0].nodeValue;
       const fullDescription = listProductNode[i].getElementsByTagName("fullDescription")[0].childNodes[0].nodeValue;
       this.products.push({
         id, name, image, price, description, fullDescription
       });
     }
+  }
+
+  private processPrice(price: string): string {
+    const parts = price.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return parts.join(",");
   }
 }
