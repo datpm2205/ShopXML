@@ -1,1 +1,29 @@
-<p>home works!</p>
+<div class="container">
+    <br>
+    <mat-card>
+        <div class="mode-container">
+            <div class="mode-display-select">
+                <b class="mr-4">Sắp xếp theo</b>
+                <mat-form-field>
+                    <mat-select [(value)]="modeDisplay" (selectionChange)="changeMode()">
+                        <mat-option *ngFor="let modeDisplay of viewModeOption" [value]="modeDisplay.value">
+                            {{modeDisplay.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-card>
+    <br>
+    <mat-paginator #paginatorTop [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"
+        [pageSizeOptions]="pageSizeOptions" showFirstLastButtons
+        (page)="paginatorBottom.pageSize = $event.pageSize; paginatorBottom.pageIndex = $event.pageIndex; onPageEvent($event)">
+    </mat-paginator>
+    <div>
+
+    </div>
+    <mat-paginator #paginatorBottom [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"
+        [pageSizeOptions]="pageSizeOptions" showFirstLastButtons
+        (page)="paginatorTop.pageSize = $event.pageSize; paginatorTop.pageIndex = $event.pageIndex; onPageEvent($event)">
+    </mat-paginator>
+</div>

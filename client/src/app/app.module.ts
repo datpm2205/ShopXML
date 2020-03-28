@@ -10,6 +10,8 @@ import { LoaderInterceptor } from './core/interceptor/loader.interceptor';
 import { LoginDialogComponent } from './shared/login-dialog/login-dialog.component';
 import { SignUpDialogComponent } from './shared/sign-up-dialog/sign-up-dialog.component';
 import { NotifyDialogComponent } from './shared/notify-dialog/notify-dialog.component';
+import { MatPaginatorIntl } from '@angular/material';
+import { getVietnamesePaginatorIntl } from './core/vietnamese-paginator.intl';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { NotifyDialogComponent } from './shared/notify-dialog/notify-dialog.comp
   providers: [
     Title,
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: MatPaginatorIntl, useValue: getVietnamesePaginatorIntl() }
   ],
   bootstrap: [AppComponent]
 })
