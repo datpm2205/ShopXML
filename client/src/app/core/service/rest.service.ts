@@ -13,6 +13,7 @@ export class RestService {
 
   private signInUrl = environment.apiUrl + "/users/sign-in/";
   private signUpUrl = environment.apiUrl + "/users/sign-up/";
+  private getProductUrl = environment.apiUrl + "/products/";
 
   constructor(
     private _http: HttpClient
@@ -40,5 +41,13 @@ export class RestService {
     formData.append('email', email);
     formData.append('phone', phone);
     return this._http.post(this.signUpUrl, formData, { responseType: 'text' });
+  }
+
+  getProduct(pageSize: any, pageIndex: any, sortMode: any) {
+    let params = new HttpParams()
+      .set('pageSize', pageSize)
+      .set('pageIndex', pageIndex)
+      .set('sortMode', sortMode);
+    return this._http.get(this.getProductUrl, { params: params, responseType: 'text' });
   }
 }

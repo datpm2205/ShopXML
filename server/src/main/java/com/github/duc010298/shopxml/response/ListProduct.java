@@ -19,6 +19,14 @@ public class ListProduct {
         this.products = products;
     }
 
+    public int getTotalRecord() {
+        return totalRecord;
+    }
+
+    public void setTotalRecord(int totalRecord) {
+        this.totalRecord = totalRecord;
+    }
+
     public int getPageSize() {
         return pageSize;
     }
