@@ -1,8 +1,8 @@
 <div class="product-container">
-    <div class="info-container">
+    <a class="info-container" [routerLink]="['product', id]">
         <img [src]="imageUrl" alt="">
         <h6 class="title_name">{{ name }}</h6>
         <h5 class="price">{{ price }} đ</h5>
-    </div>
+    </a>
     <button mat-raised-button color="primary" class="buy-button"><i class="fas fa-cart-plus"></i> Mua hàng</button>
 </div>

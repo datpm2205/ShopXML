@@ -6,6 +6,7 @@ import { Shell } from './shell/shell.service';
 const routes: Routes = [
   Shell.childRoutes([
     { path: '', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+    { path: 'product', loadChildren: () => import('./product-detail/product-detail.module').then(m => m.ProductDetailModule) },
   ]),
 
   // Fallback when no prior route is matched
