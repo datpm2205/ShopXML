@@ -14,6 +14,7 @@ interface SelectOption {
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  products = [];
   length = 0;
   pageSize = 25;
   pageIndex = 0;
@@ -66,12 +67,11 @@ export class HomeComponent implements OnInit {
   }
 
   async requestSearch(pageSize: number, pageIndex: number, modeDisplay: string) {
-    console.log('sdads');
     await this.restService.getProduct(pageSize, pageIndex, modeDisplay)
       .toPromise()
       .then(
         (res: any) => {
-          console.log(res);
+          this.processXML(res)
         }, () => {
           this.dialog.open(NotifyDialogComponent, {
             width: '350px',
@@ -81,5 +81,26 @@ export class HomeComponent implements OnInit {
           });
         }
       )
+  }
+
+  private processXML(data: any) {
+    const xmlDoc = new DOMParser().parseFromString(data, "text/xml");
+    this.length = +xmlDoc.getElementsByTagName("totalRecord")[0].childNodes[0].nodeValue;
+    this.pageSize = +xmlDoc.getElementsByTagName("pageSize")[0].childNodes[0].nodeValue;
+    this.pageIndex = +xmlDoc.getElementsByTagName("pageIndex")[0].childNodes[0].nodeValue;
+    this.modeDisplay = xmlDoc.getElementsByTagName("sortMode")[0].childNodes[0].nodeValue;
+
+    const listProductNode: any = xmlDoc.getElementsByTagName("products")[0].childNodes;
+    for (let i = 0; i < listProductNode.length; i++) {
+      const id = listProductNode[i].getElementsByTagName("id")[0].childNodes[0].nodeValue;
+      const name = listProductNode[i].getElementsByTagName("name")[0].childNodes[0].nodeValue;
+      const image = listProductNode[i].getElementsByTagName("image")[0].childNodes[0].nodeValue;
+      const price = listProductNode[i].getElementsByTagName("price")[0].childNodes[0].nodeValue;
+      const description = listProductNode[i].getElementsByTagName("description")[0].childNodes[0].nodeValue;
+      const fullDescription = listProductNode[i].getElementsByTagName("fullDescription")[0].childNodes[0].nodeValue;
+      this.products.push({
+        id, name, image, price, description, fullDescription
+      });
+    }
   }
 }

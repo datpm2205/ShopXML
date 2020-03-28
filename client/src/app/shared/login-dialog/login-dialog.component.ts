@@ -65,8 +65,7 @@ export class LoginDialogComponent implements OnInit {
   }
 
   private processXml(data: string) {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(data, "text/xml");
+    const xmlDoc = new DOMParser().parseFromString(data, "text/xml");
     const token = xmlDoc.getElementsByTagName("token")[0].childNodes[0].nodeValue;
     const appUserNode = xmlDoc.getElementsByTagName("appUser")[0];
     const user = {
