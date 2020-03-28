@@ -9,6 +9,7 @@ public class Bill {
     private int id;
     private Date dateCreate;
     private int purchasePrice;
+    private String address;
     private int status;
     private AppUser user;
     private Product product;
@@ -42,6 +43,16 @@ public class Bill {
 
     public void setPurchasePrice(int purchasePrice) {
         this.purchasePrice = purchasePrice;
+    }
+
+    @Basic
+    @Column(name = "address")
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @Basic

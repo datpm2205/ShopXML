@@ -1,2 +1,41 @@
-<p>shell works!</p>
+<mat-toolbar color="primary">
+    <button mat-button>
+        <h6>ShopXML</h6>
+    </button>
+    <span class="spacer"></span>
+    <button mat-button [matMenuTriggerFor]="menuCart">
+        Giỏ hàng <i class="fas fa-shopping-cart"></i>
+    </button>
+    <mat-menu #menuCart="matMenu">
+        <button mat-menu-item>
+            Sản phẩm 1
+        </button>
+        <button mat-menu-item>
+            Sản phẩm 2
+        </button>
+    </mat-menu>
+
+    <button mat-button *ngIf="!fullNameUser" (click)="openLoginDialog()">
+        Đăng nhập <i class="fas fa-sign-in-alt"></i>
+    </button>
+    <button mat-button [matMenuTriggerFor]="menuUser" *ngIf="fullNameUser">
+        {{ fullNameUser }} <i class="fas fa-user"></i>
+    </button>
+    <mat-menu #menuUser="matMenu">
+        <button mat-menu-item>
+            <i class="fas fa-truck"></i> Đơn hàng của tôi
+        </button>
+        <button mat-menu-item disabled>
+            <i class="fas fa-info-circle"></i> Thông tin cá nhân
+        </button>
+        <button mat-menu-item disabled>
+            <i class="fas fa-key"></i> Đổi mật khẩu
+        </button>
+        <button mat-menu-item (click)="logout()">
+            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </button>
+    </mat-menu>
+</mat-toolbar>
+<div class="progress-area" *ngIf="!showLoader"></div>
+<mat-progress-bar mode="indeterminate" *ngIf="showLoader"></mat-progress-bar>
 <router-outlet></router-outlet>

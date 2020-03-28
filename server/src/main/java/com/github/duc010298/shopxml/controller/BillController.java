@@ -35,7 +35,7 @@ public class BillController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> addBill(@RequestParam("product_id") int productId, @RequestHeader("token") String token) {
+    public ResponseEntity<?> addBill(@RequestParam("product_id") int productId, @RequestParam("address") String address, @RequestHeader("token") String token) {
         try {
             String userName = tokenAuthenticationService.getUserName(token);
             AppUser currentUser = appUserRepository.findByUserName(userName);
@@ -47,6 +47,7 @@ public class BillController {
             Bill bill = new Bill();
             bill.setDateCreate(new Date());
             bill.setPurchasePrice(product.getPrice());
+            bill.setAddress(address);
             bill.setUser(currentUser);
             bill.setProduct(product);
             billRepository.save(bill);

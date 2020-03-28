@@ -26,12 +26,13 @@ create table if not exists product
 
 create table if not exists bill
 (
-    id             serial not null primary key,
-    user_id        int    not null,
-    product_id     int    not null,
-    date_create    date   not null,
-    purchase_price int    not null,
-    status         int    not null,
+    id             serial       not null primary key,
+    user_id        int          not null,
+    product_id     int          not null,
+    date_create    date         not null,
+    purchase_price int          not null,
+    address        varchar(250) not null,
+    status         int          not null,
     constraint order_fk1 foreign key (user_id) references app_user (id),
     constraint order_fk2 foreign key (product_id) references product (id)
 );

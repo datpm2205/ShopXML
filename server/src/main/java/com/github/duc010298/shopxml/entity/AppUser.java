@@ -79,6 +79,7 @@ public class AppUser {
     }
 
     @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     public List<Bill> getBillList() {
         return billList;
     }

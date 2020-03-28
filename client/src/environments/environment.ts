@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  credentialsKey: 'shop_credentials',
   apiUrl: 'http://localhost:8080'
 };
 

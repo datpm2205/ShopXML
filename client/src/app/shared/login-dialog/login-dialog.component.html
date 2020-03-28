@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>Đăng nhập</h1>
+<div mat-dialog-content>
+    <form [formGroup]="formGroup">
+        <mat-form-field class="full-width">
+            <mat-label>Tên đăng nhập</mat-label>
+            <input matInput placeholder="Tên đăng nhập" type="text" formControlName="username">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Mật khẩu</mat-label>
+            <input matInput placeholder="Mật khẩu" type="password" formControlName="password">
+        </mat-form-field>
+    </form>
+    <div class="text-center"><button type="button" class="btn btn-link"(click)="signUp()">Tạo mới tài khoản</button></div>
+    <br>
+</div>
+<div mat-dialog-actions>
+    <button class="btn-close-dialog" mat-raised-button color="warn" mat-dialog-close cdkFocusInitial>Hủy bỏ</button>
+    <button class="btn-close-dialog" mat-raised-button color="primary" [disabled]="formGroup.invalid" cdkFocusInitial
+        (click)="login()">
+        Đăng nhập
+    </button>
+</div>
