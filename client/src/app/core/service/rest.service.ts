@@ -50,4 +50,9 @@ export class RestService {
       .set('sortMode', sortMode);
     return this._http.get(this.getProductUrl, { params: params, responseType: 'text' });
   }
+
+  getProductDetail(id: any) {
+    const url = this.getProductUrl + id
+    return this._http.get(url, { responseType: 'text' });
+  }
 }

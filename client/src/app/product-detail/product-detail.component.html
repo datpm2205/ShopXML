@@ -1,13 +1,20 @@
-<div class="container" style="background-color: white;">
+<div class="container" style="background-color: white;" *ngIf="product">
     <br>
     <h1>Thông tin chi tiết</h1>
     <br>
     <div class="row">
         <div class="col-sm-4">
-            dd
+            <img [src]="product.image" alt="" style="width: 100%;">
         </div>
         <div class="col-sm-8">
-            đâsd
+            <h1>{{product.name}}</h1>
+            <h2>{{product.price}} đ</h2>
+            <p>{{product.description}}</p>
+            <br>
+            <button mat-raised-button color="primary"><i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng</button>
         </div>
     </div>
+    <br>
+    <p>{{product.fullDescription}}</p>
+    <br>
 </div>
