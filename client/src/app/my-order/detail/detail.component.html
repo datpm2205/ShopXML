@@ -1,1 +1,43 @@
-<p>detail works!</p>
+<div class="container" style="background-color: white;" *ngIf="billInfo">
+    <br>
+    <h1>Chi tiết đơn hàng</h1>
+    <br>
+    <div class="row">
+        <div class="col-md-7" style="border-right: 1px solid gray;">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá tiền</th>
+                        <th>Số lượng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of products; index as i">
+                        <td>{{ i + 1 }}</td>
+                        <td>
+                            <img [src]="p.image" alt="" style="width: 50px;">
+                        </td>
+                        <td><b>{{ p.name }}</b></td>
+                        <td>{{ p.price }} đ</td>
+                        <td>{{ p.amount }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5">
+            <h3>Thông tin đơn hàng</h3>
+            <hr>
+            <h5>Tổng tiền: <b>{{ billInfo.totalPrice }} đ</b></h5>
+            <br>
+            <h6><b>Ngày tạo: </b>{{ billInfo.dateCreate | date: 'dd/MM/yyyy' }}</h6>
+            <h6><b>Người nhận hàng: </b>{{ billInfo.recipientName }}</h6>
+            <h6><b>Số điện thoại: </b>{{ billInfo.recipientPhone }}</h6>
+            <h6><b>Địa chỉ:</b></h6>
+            <p>{{ billInfo.recipientAddress }}</p>
+        </div>
+    </div>
+    <br>
+</div>

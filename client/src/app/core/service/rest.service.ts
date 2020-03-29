@@ -53,7 +53,7 @@ export class RestService {
   }
 
   getProductDetail(id: any) {
-    const url = this.getProductUrl + id
+    const url = this.getProductUrl + id;
     return this._http.get(url, { responseType: 'text' });
   }
 
@@ -69,5 +69,12 @@ export class RestService {
     let headers = new HttpHeaders();
     headers = headers.append('token', token);
     return this._http.get(this.billUrl, { headers: headers, responseType: 'text' });
+  }
+
+  getBillDetail(id: any, token: any) {
+    const url = this.billUrl + id;
+    let headers = new HttpHeaders();
+    headers = headers.append('token', token);
+    return this._http.get(url, { headers: headers, responseType: 'text' });
   }
 }

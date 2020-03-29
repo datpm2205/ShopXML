@@ -40,10 +40,22 @@ public class BillController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> getBills( @RequestHeader("token") String token) {
+    public ResponseEntity<?> getBills(@RequestHeader("token") String token) {
         String userName = tokenAuthenticationService.getUserName(token);
         AppUser currentUser = appUserRepository.findByUserName(userName);
         return ResponseEntity.status(HttpStatus.OK).body(currentUser.getBillList());
+    }
+
+    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<?> getBillDetail(@RequestHeader("token") String token, @PathVariable("id") int id) {
+        String userName = tokenAuthenticationService.getUserName(token);
+        AppUser currentUser = appUserRepository.findByUserName(userName);
+        for (Bill b : currentUser.getBillList()) {
+            if (b.getId() == id) {
+                return ResponseEntity.status(HttpStatus.OK).body(b);
+            }
+        }
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @PostMapping(produces = MediaType.APPLICATION_XML_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
