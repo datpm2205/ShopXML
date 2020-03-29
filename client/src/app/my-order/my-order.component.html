@@ -7,13 +7,26 @@
             <tr>
                 <th></th>
                 <th>Ngày đặt hàng</th>
+                <th>Người nhận</th>
+                <th>Số điện thoại</th>
+                <th style="width: 300px;">Địa chỉ</th>
                 <th>Tổng giá trị hóa đơn</th>
                 <th>Trạng thái</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            
+            <tr *ngFor="let b of bill; index as i">
+                <td>{{ i + 1 }}</td>
+                <td>{{ b.dateCreate | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ b.recipientName }}</td>
+                <td>{{ b.recipientPhone }}</td>
+                <td>{{ b.recipientAddress }}</td>
+                <td>{{ b.totalPrice }} đ</td>
+                <td>Đang giao</td>
+                <td><a [routerLink]="['/my-order', 'detail', b.id]">Chi tiết</a></td>
+            </tr>
         </tbody>
     </table>
+    <br>
 </div>

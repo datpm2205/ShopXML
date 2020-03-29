@@ -11,6 +11,7 @@ import { NotifyDialogComponent } from '../shared/notify-dialog/notify-dialog.com
 })
 export class MyOrderComponent implements OnInit {
   credential: any;
+  bill = [];
 
   constructor(
     private restService: RestService,
@@ -40,6 +41,34 @@ export class MyOrderComponent implements OnInit {
   }
 
   private processXml(data: any) {
+    const xmlDoc = new DOMParser().parseFromString(data, "text/xml");
+    const listNodeItem: any = xmlDoc.getElementsByTagName("PersistentBag")[0].childNodes;
+    for (const child of listNodeItem) {
+      const id = child.getElementsByTagName("id")[0].childNodes[0].nodeValue;
+      const dateCreate = child.getElementsByTagName("dateCreate")[0].childNodes[0].nodeValue;
+      const recipientName = child.getElementsByTagName("recipientName")[0].childNodes[0].nodeValue;
+      const recipientPhone = child.getElementsByTagName("recipientPhone")[0].childNodes[0].nodeValue;
+      const recipientAddress = child.getElementsByTagName("recipientAddress")[0].childNodes[0].nodeValue;
+      let totalPrice: any = 0;
 
+      const billDetailList = child.getElementsByTagName("billDetails")[0].childNodes;
+      for (const detailNode of billDetailList) {
+        const price = detailNode.getElementsByTagName("productPrice")[0].childNodes[0].nodeValue;
+        const amount = detailNode.getElementsByTagName("amount")[0].childNodes[0].nodeValue;
+        totalPrice += price * amount;
+      }
+      totalPrice = this.processPrice(totalPrice.toString());
+
+      this.bill.push({
+        id, dateCreate, recipientName, recipientPhone, recipientAddress, totalPrice
+      });
+    }
   }
+
+  private processPrice(price: string): string {
+    const parts = price.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return parts.join(",");
+  }
+
 }
