@@ -55,7 +55,7 @@
             </mat-radio-group>
             <br>
             <div style="justify-content: flex-end; display: flex;">
-                <button mat-raised-button color="primary" style="width: 200px;" (click)="checkoutProcess()">
+                <button [disabled]="products.length == 0"  mat-raised-button color="primary" style="width: 200px;" (click)="checkoutProcess()">
                     <i class="fas fa-shopping-cart"></i> Đặt hàng
                 </button>
             </div>
