@@ -69,7 +69,7 @@ export class ProductDetailComponent implements OnInit {
   addProductToCart() {
     this.cartService.addProductToCart(this.product);
     this._snackBar.openFromComponent(ToastComponent, {
-      duration: 2000,
+      duration: 500,
       verticalPosition: 'top',
       horizontalPosition: 'right',
       data: { message: 'Đã thêm vào giỏ hàng' }

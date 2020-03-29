@@ -8,7 +8,17 @@ export class CartService {
   listProductOnCart = [];
   cartChange: Subject<any> = new Subject();
 
-  constructor() { }
+  constructor() { 
+    const dataOnSession = sessionStorage.getItem("shop_cart");
+    console.log(dataOnSession);
+    if (dataOnSession) {
+      this.listProductOnCart = JSON.parse(dataOnSession);
+    }
+  }
+
+  private addItemToSession(data: any) {
+    sessionStorage.setItem("shop_cart", JSON.stringify(data))
+  }
 
   addProductToCart(product: any) {
     let exist = false;
@@ -22,11 +32,13 @@ export class CartService {
       product.amount = 1;
       this.listProductOnCart.push(product);
     }
+    this.addItemToSession(this.listProductOnCart);
     this.cartChange.next(this.listProductOnCart);
   }
 
   cleanCart() {
     this.listProductOnCart = [];
+    this.addItemToSession([]);
     this.cartChange.next(this.listProductOnCart);
   }
 
@@ -36,6 +48,7 @@ export class CartService {
         this.listProductOnCart.splice(i, 1);;
       }
     }
+    this.addItemToSession(this.listProductOnCart);
     this.cartChange.next(this.listProductOnCart);
   }
 }

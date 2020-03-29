@@ -41,13 +41,13 @@ export class ShellComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.productOnCart = this.cartService.listProductOnCart;
     this.subscription = this.restService.loaderState.subscribe(
       (state: LoaderState) => {
         this.loaderService.showLoader(state.show);
       }
     );
     const savedCredentials: any = sessionStorage.getItem(environment.credentialsKey);
-    console.log(savedCredentials);
     if (savedCredentials) {
       this.fullNameUser = JSON.parse(savedCredentials).user.fullName;
     }
