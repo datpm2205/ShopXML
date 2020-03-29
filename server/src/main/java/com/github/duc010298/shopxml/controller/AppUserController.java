@@ -2,7 +2,7 @@ package com.github.duc010298.shopxml.controller;
 
 import com.github.duc010298.shopxml.entity.AppUser;
 import com.github.duc010298.shopxml.entity.Bill;
-import com.github.duc010298.shopxml.response.LoginResponse;
+import com.github.duc010298.shopxml.dto.LoginResponse;
 import com.github.duc010298.shopxml.repository.AppUserRepository;
 import com.github.duc010298.shopxml.services.TokenAuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs';
 import { LoaderState } from '../loader';
 import { environment } from 'src/environments/environment';
@@ -14,6 +14,7 @@ export class RestService {
   private signInUrl = environment.apiUrl + "/users/sign-in/";
   private signUpUrl = environment.apiUrl + "/users/sign-up/";
   private getProductUrl = environment.apiUrl + "/products/";
+  private addBillUrl = environment.apiUrl + "/bills/";
 
   constructor(
     private _http: HttpClient
@@ -54,5 +55,13 @@ export class RestService {
   getProductDetail(id: any) {
     const url = this.getProductUrl + id
     return this._http.get(url, { responseType: 'text' });
+  }
+
+  addBill(data: any, token: any) {
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/xml');
+    headers = headers.append('Accept', 'application/xml');
+    headers = headers.append('token', token);
+    return this._http.post(this.addBillUrl, data, { headers: headers, responseType: 'text' });
   }
 }

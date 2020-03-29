@@ -1,18 +1,22 @@
 package com.github.duc010298.shopxml.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "bill")
 public class Bill {
     private int id;
     private Date dateCreate;
-    private int purchasePrice;
-    private String address;
+    private String recipientName;
+    private String recipientPhone;
+    private String recipientAddress;
     private int status;
     private AppUser user;
-    private Product product;
+    private List<BillDetail> billDetails;
 
     @Id
     @Column(name = "id")
@@ -35,24 +39,46 @@ public class Bill {
         this.dateCreate = dateCreate;
     }
 
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    public AppUser getUser() {
+        return user;
+    }
+
+    public void setUser(AppUser user) {
+        this.user = user;
+    }
+
     @Basic
-    @Column(name = "purchase_price")
-    public int getPurchasePrice() {
-        return purchasePrice;
+    @Column(name = "recipient_name")
+    public String getRecipientName() {
+        return recipientName;
     }
 
-    public void setPurchasePrice(int purchasePrice) {
-        this.purchasePrice = purchasePrice;
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
     }
 
     @Basic
-    @Column(name = "address")
-    public String getAddress() {
-        return address;
+    @Column(name = "recipient_phone")
+    public String getRecipientPhone() {
+        return recipientPhone;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setRecipientPhone(String recipientPhone) {
+        this.recipientPhone = recipientPhone;
+    }
+
+    @Basic
+    @Column(name = "recipient_address")
+    public String getRecipientAddress() {
+        return recipientAddress;
+    }
+
+    public void setRecipientAddress(String recipientAddress) {
+        this.recipientAddress = recipientAddress;
     }
 
     @Basic
@@ -65,23 +91,12 @@ public class Bill {
         this.status = status;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    public AppUser getUser() {
-        return user;
+    @OneToMany(mappedBy = "bill", cascade = CascadeType.ALL)
+    public List<BillDetail> getBillDetails() {
+        return billDetails;
     }
 
-    public void setUser(AppUser user) {
-        this.user = user;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "product_id")
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setBillDetails(List<BillDetail> billDetails) {
+        this.billDetails = billDetails;
     }
 }

@@ -10,7 +10,6 @@ export class CartService {
 
   constructor() { 
     const dataOnSession = sessionStorage.getItem("shop_cart");
-    console.log(dataOnSession);
     if (dataOnSession) {
       this.listProductOnCart = JSON.parse(dataOnSession);
     }

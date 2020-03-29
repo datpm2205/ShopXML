@@ -2,7 +2,7 @@ package com.github.duc010298.shopxml.controller;
 
 import com.github.duc010298.shopxml.entity.Product;
 import com.github.duc010298.shopxml.repository.ProductRepository;
-import com.github.duc010298.shopxml.response.ListProduct;
+import com.github.duc010298.shopxml.dto.ListProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

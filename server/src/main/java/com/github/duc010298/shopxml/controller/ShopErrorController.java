@@ -1,6 +1,6 @@
 package com.github.duc010298.shopxml.controller;
 
-import com.github.duc010298.shopxml.response.ErrorResponse;
+import com.github.duc010298.shopxml.dto.ErrorResponse;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

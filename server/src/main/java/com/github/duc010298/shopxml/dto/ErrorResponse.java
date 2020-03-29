@@ -1,4 +1,4 @@
-package com.github.duc010298.shopxml.response;
+package com.github.duc010298.shopxml.dto;
 
 import java.util.Date;
 
