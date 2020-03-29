@@ -8,6 +8,8 @@ import { LoginDialogComponent } from '../shared/login-dialog/login-dialog.compon
 import { UserAuthenService } from './user-authen.service';
 import { environment } from 'src/environments/environment';
 import { CartService } from './cart.service';
+import { Router } from '@angular/router';
+import { NotifyDialogComponent } from '../shared/notify-dialog/notify-dialog.component';
 
 @Component({
   selector: 'app-shell',
@@ -27,6 +29,7 @@ export class ShellComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     private dialog: MatDialog,
     private cartService: CartService,
+    private router: Router
   ) {
     this.loaderService.showLoaderSubject.subscribe((value: boolean) => {
       this.showLoader = value;
@@ -65,10 +68,28 @@ export class ShellComponent implements OnInit {
   logout() {
     this.fullNameUser = undefined;
     sessionStorage.removeItem(environment.credentialsKey);
+    this.cartService.cleanCart();
+    this.router.navigate(['/']);
   }
 
   removeProductFromCart(id: string, event: any) {
     event.stopPropagation();
     this.cartService.removeProduct(id);
+  }
+
+  checkout() {
+    if (this.fullNameUser) {
+      this.router.navigate(['/checkout']);
+    } else {
+      const dialogRef = this.dialog.open(NotifyDialogComponent, {
+        width: '350px',
+        disableClose: true,
+        autoFocus: false,
+        data: { title: "Thông báo", content: "Trước tiên bạn cần đăng nhập" },
+      });
+      dialogRef.afterClosed().subscribe(res => {
+        this.openLoginDialog();
+      });
+    }
   }
 }

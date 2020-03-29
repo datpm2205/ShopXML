@@ -8,6 +8,7 @@ import { CartService } from '../shell/cart.service';
 })
 export class CheckoutComponent implements OnInit {
   products: any;
+  totalPrice = 0;
 
   constructor(
     private cartService: CartService
@@ -17,4 +18,14 @@ export class CheckoutComponent implements OnInit {
     this.products = this.cartService.listProductOnCart;
   }
 
+  removeProduct(id: string) {
+    this.cartService.removeProduct(id);
+    this.products = this.cartService.listProductOnCart;
+  }
+
+  private processPrice(price: string): string {
+    const parts = price.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    return parts.join(",");
+  }
 }

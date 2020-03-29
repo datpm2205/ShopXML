@@ -3,18 +3,37 @@
     <h1>Đặt hàng</h1>
     <br>
     <div class="row">
-        <div class="col-md-6" style="border-right: 1px solid gray;">
+        <div class="col-md-7" style="border-right: 1px solid gray;">
             <table class="table">
-                <tbody>
+                <thead>
                     <tr>
-                        <td>sdsadas</td>
-                        <td>sadasd</td>
-                        <td>sdsadasd@example.com</td>
+                      <th></th>
+                      <th>Tên sản phẩm</th>
+                      <th>Giá tiền</th>
+                      <th>Số lượng</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                <tbody>
+                    <tr *ngFor="let p of products">
+                        <td>
+                            <img [src]="p.image" alt="" style="width: 50px;">
+                        </td>
+                        <td><b>{{ p.name }}</b></td>
+                        <td>{{ p.price }} đ</td>
+                        <td>{{ p.amount }}</td>
+                        <td>
+                            <button mat-button (click)="removeProduct(p.id)">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <div class="col-md-6"></div>
+        <div class="col-md-5">
+            <h3>Tổng tiền: <b>{{ totalPrice }} đ</b></h3>
+        </div>
     </div>
     <br>
 </div>
