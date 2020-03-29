@@ -7,13 +7,13 @@
             <table class="table">
                 <thead>
                     <tr>
-                      <th></th>
-                      <th>Tên sản phẩm</th>
-                      <th>Giá tiền</th>
-                      <th>Số lượng</th>
-                      <th></th>
+                        <th></th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá tiền</th>
+                        <th>Số lượng</th>
+                        <th></th>
                     </tr>
-                  </thead>
+                </thead>
                 <tbody>
                     <tr *ngFor="let p of products">
                         <td>
@@ -33,6 +33,32 @@
         </div>
         <div class="col-md-5">
             <h3>Tổng tiền: <b>{{ totalPrice }} đ</b></h3>
+            <hr>
+            <h5>Thông tin giao hàng</h5>
+            <form [formGroup]="formGroup">
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Tên người nhận</mat-label>
+                    <input matInput placeholder="Tên người nhận" type="text" formControlName="recipientName">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Số điện thoại người nhận hàng</mat-label>
+                    <input matInput placeholder="Số điện thoại người nhận" type="text" formControlName="recipientPhone">
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="full-width">
+                    <mat-label>Địa chỉ nhận hàng</mat-label>
+                    <textarea style="height: 150px;" matInput placeholder="Địa chỉ nhận hàng" type="text"
+                        formControlName="recipientAddress"></textarea>
+                </mat-form-field>
+            </form>
+            <mat-radio-group>
+                <mat-radio-button checked>Thanh toán khi nhận hàng</mat-radio-button>
+            </mat-radio-group>
+            <br>
+            <div style="justify-content: flex-end; display: flex;">
+                <button mat-raised-button color="primary" style="width: 200px;" (click)="checkoutProcess()">
+                    <i class="fas fa-shopping-cart"></i> Thanh toán
+                </button>
+            </div>
         </div>
     </div>
     <br>

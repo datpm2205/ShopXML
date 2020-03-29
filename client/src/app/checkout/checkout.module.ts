@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { CheckoutRoutingModule } from './checkout-routing.module';
 import { CheckoutComponent } from './checkout.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule, MatInputModule } from '@angular/material';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
@@ -11,7 +14,12 @@ import { MatButtonModule } from '@angular/material/button';
   imports: [
     CommonModule,
     CheckoutRoutingModule,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatRadioModule
   ]
 })
 export class CheckoutModule { }

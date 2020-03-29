@@ -10,10 +10,11 @@ import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component
 import { NotifyDialogComponent } from './notify-dialog/notify-dialog.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ToastComponent } from './toast/toast.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 @NgModule({
-  declarations: [LoginDialogComponent, SignUpDialogComponent, NotifyDialogComponent, ToastComponent],
+  declarations: [LoginDialogComponent, SignUpDialogComponent, NotifyDialogComponent, ToastComponent, ConfirmDialogComponent],
   imports: [
     CommonModule,
     MatDialogModule,

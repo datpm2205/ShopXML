@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>{{title}}</h1>
+<div mat-dialog-content>
+    <p>{{content}}</p>
+</div>
+<div mat-dialog-actions>
+    <button class="btn-close-dialog" [mat-dialog-close]="false" mat-raised-button color="warn" mat-dialog-close
+        cdkFocusInitial>Hủy bỏ</button>
+    <button class="btn-close-dialog" [mat-dialog-close]="true" mat-raised-button color="primary" mat-dialog-close
+        cdkFocusInitial>Đồng ý</button>
+</div>
