@@ -40,9 +40,10 @@ public class BillController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_XML_VALUE)
-    public ResponseEntity<?> test() {
-        System.out.println("abcd");
-        return ResponseEntity.status(HttpStatus.OK).body(billRepository.findAll().get(0));
+    public ResponseEntity<?> getBills( @RequestHeader("token") String token) {
+        String userName = tokenAuthenticationService.getUserName(token);
+        AppUser currentUser = appUserRepository.findByUserName(userName);
+        return ResponseEntity.status(HttpStatus.OK).body(currentUser.getBillList());
     }
 
     @PostMapping(produces = MediaType.APPLICATION_XML_VALUE, consumes = MediaType.APPLICATION_XML_VALUE)
@@ -51,7 +52,7 @@ public class BillController {
         try {
             bill.setDateCreate(new Date());
             bill.setRecipientName(billDTO.getRecipientName());
-            bill.setRecipientPhone(billDTO.getRecipientName());
+            bill.setRecipientPhone(billDTO.getRecipientPhone());
             bill.setRecipientAddress(billDTO.getRecipientAddress());
             bill.setStatus(1);
 

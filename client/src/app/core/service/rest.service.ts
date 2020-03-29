@@ -14,7 +14,7 @@ export class RestService {
   private signInUrl = environment.apiUrl + "/users/sign-in/";
   private signUpUrl = environment.apiUrl + "/users/sign-up/";
   private getProductUrl = environment.apiUrl + "/products/";
-  private addBillUrl = environment.apiUrl + "/bills/";
+  private billUrl = environment.apiUrl + "/bills/";
 
   constructor(
     private _http: HttpClient
@@ -62,6 +62,12 @@ export class RestService {
     headers = headers.append('Content-Type', 'application/xml');
     headers = headers.append('Accept', 'application/xml');
     headers = headers.append('token', token);
-    return this._http.post(this.addBillUrl, data, { headers: headers, responseType: 'text' });
+    return this._http.post(this.billUrl, data, { headers: headers, responseType: 'text' });
+  }
+
+  getBills(token: any) {
+    let headers = new HttpHeaders();
+    headers = headers.append('token', token);
+    return this._http.get(this.billUrl, { headers: headers, responseType: 'text' });
   }
 }

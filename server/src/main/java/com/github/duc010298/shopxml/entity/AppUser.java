@@ -78,7 +78,7 @@ public class AppUser {
         this.phone = phone;
     }
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonIgnore
     public List<Bill> getBillList() {
         return billList;
