@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RestService } from '../core/service/rest.service';
 import { NotifyDialogComponent } from '../shared/notify-dialog/notify-dialog.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
+import { CartService } from '../shell/cart.service';
+import { ToastComponent } from '../shared/toast/toast.component';
 
 @Component({
   selector: 'app-product-detail',
@@ -16,7 +18,9 @@ export class ProductDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private dialog: MatDialog,
-    private restService: RestService
+    private restService: RestService,
+    private cartService: CartService,
+    private _snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -60,5 +64,15 @@ export class ProductDetailComponent implements OnInit {
     const parts = price.toString().split(".");
     parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     return parts.join(",");
+  }
+
+  addProductToCart() {
+    this.cartService.addProductToCart(this.product);
+    this._snackBar.openFromComponent(ToastComponent, {
+      duration: 2000,
+      verticalPosition: 'top',
+      horizontalPosition: 'right',
+      data: { message: 'Đã thêm vào giỏ hàng' }
+    });
   }
 }

@@ -19,7 +19,7 @@ export class CartService {
       }
     }
     if (!exist) {
-      product.amount = 0;
+      product.amount = 1;
       this.listProductOnCart.push(product);
     }
     this.cartChange.next(this.listProductOnCart);

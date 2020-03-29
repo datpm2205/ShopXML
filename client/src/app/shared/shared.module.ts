@@ -8,10 +8,12 @@ import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component';
 import { NotifyDialogComponent } from './notify-dialog/notify-dialog.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ToastComponent } from './toast/toast.component';
 
 
 @NgModule({
-  declarations: [LoginDialogComponent, SignUpDialogComponent, NotifyDialogComponent],
+  declarations: [LoginDialogComponent, SignUpDialogComponent, NotifyDialogComponent, ToastComponent],
   imports: [
     CommonModule,
     MatDialogModule,
@@ -20,6 +22,7 @@ import { NotifyDialogComponent } from './notify-dialog/notify-dialog.component';
     MatInputModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSnackBarModule
   ]
 })
 export class SharedModule { }

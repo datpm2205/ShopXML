@@ -12,6 +12,7 @@ import { SignUpDialogComponent } from './shared/sign-up-dialog/sign-up-dialog.co
 import { NotifyDialogComponent } from './shared/notify-dialog/notify-dialog.component';
 import { MatPaginatorIntl } from '@angular/material';
 import { getVietnamesePaginatorIntl } from './core/vietnamese-paginator.intl';
+import { ToastComponent } from './shared/toast/toast.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { getVietnamesePaginatorIntl } from './core/vietnamese-paginator.intl';
   entryComponents: [
     LoginDialogComponent,
     SignUpDialogComponent,
-    NotifyDialogComponent
+    NotifyDialogComponent,
+    ToastComponent
   ],
   providers: [
     Title,
