@@ -22,7 +22,7 @@
     </mat-paginator>
     <div class="product-container">
         <div *ngFor="let p of products">
-            <app-product [id]="p.id" [name]="p.name" [imageUrl]="p.image" [price]="p.price"></app-product>
+            <app-product [product]="p"></app-product>
         </div>
     </div>
     <mat-paginator #paginatorBottom [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex"

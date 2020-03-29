@@ -7,3 +7,35 @@
   width: 100%;
   clear: both;
 }
+
+::ng-deep {
+  .mat-menu-panel {
+    max-width: 100% !important;
+    min-width: 400px !important;
+    max-height: 400px !important;
+  }
+
+  div.mat-menu-item {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    outline: 0;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    /** set line height to desired height */
+    line-height: 18px;
+    /** set height to auto */
+    height: auto;
+    padding: 0 16px;
+    text-align: left;
+    text-decoration: none;
+    max-width: 100%;
+    position: relative;
+}
+}

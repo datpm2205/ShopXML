@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LoginDialogComponent } from '../shared/login-dialog/login-dialog.component';
 import { UserAuthenService } from './user-authen.service';
 import { environment } from 'src/environments/environment';
+import { CartService } from './cart.service';
 
 @Component({
   selector: 'app-shell',
@@ -17,6 +18,7 @@ export class ShellComponent implements OnInit {
   showLoader = false;
   subscription: Subscription;
   fullNameUser: string;
+  productOnCart = [];
 
   constructor(
     private restService: RestService,
@@ -24,6 +26,7 @@ export class ShellComponent implements OnInit {
     private userAuthenService: UserAuthenService,
     private changeDetectorRef: ChangeDetectorRef,
     private dialog: MatDialog,
+    private cartService: CartService,
   ) {
     this.loaderService.showLoaderSubject.subscribe((value: boolean) => {
       this.showLoader = value;
@@ -31,6 +34,9 @@ export class ShellComponent implements OnInit {
     });
     this.userAuthenService.fullNameChange.subscribe((value: any) => {
       this.fullNameUser = value;
+    });
+    this.cartService.cartChange.subscribe((value: any) => {
+      this.productOnCart = value;
     });
   }
 
@@ -59,5 +65,10 @@ export class ShellComponent implements OnInit {
   logout() {
     this.fullNameUser = undefined;
     sessionStorage.removeItem(environment.credentialsKey);
+  }
+
+  removeProductFromCart(id: string, event: any) {
+    event.stopPropagation();
+    this.cartService.removeProduct(id);
   }
 }

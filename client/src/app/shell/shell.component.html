@@ -7,11 +7,29 @@
         Giỏ hàng <i class="fas fa-shopping-cart"></i>
     </button>
     <mat-menu #menuCart="matMenu">
-        <button mat-menu-item>
-            Sản phẩm 1
+        <div mat-menu-item *ngFor="let p of productOnCart" style="cursor: default;" (click)="$event.stopPropagation();">
+            <img [src]="p.image" alt="" style="width: 46px; margin: 2px; float: left;">
+            <div class="row" style="width: 85%; margin-left: 10px; margin-top: 5px; float: left;">
+                <div class="col">
+                    <b>{{p.name}}</b>
+                    <div>{{p.price}} đ</div>
+                </div>
+                <div class="col" style="text-align: right;">
+                    <span class="badge badge-primary">{{ p.amount }}</span>
+                    <span style="margin-left: 5px;">
+                        <i class="fas fa-trash" style="vertical-align: middle; cursor: pointer;"
+                            (click)="removeProductFromCart(p.id, $event)"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <button disabled mat-menu-item *ngIf="productOnCart.length === 0"
+            style="text-align: center; font-weight: bold; background-color: rgba(0,0,0,.12); margin-top: 10px; color: rgba(0,0,0,.26);">
+            Checkout
         </button>
-        <button mat-menu-item>
-            Sản phẩm 2
+        <button mat-menu-item *ngIf="productOnCart.length !== 0"
+            style="text-align: center; font-weight: bold; background-color: #3f51b5; margin-top: 10px; color: white;">
+            Checkout
         </button>
     </mat-menu>
 
