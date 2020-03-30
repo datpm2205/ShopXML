@@ -18,7 +18,7 @@ create table if not exists product
     name             varchar(250) not null,
     image            varchar(250) not null,
     price            int          not null,
-    description      varchar(250) not null,
+    description      text         not null,
     full_description text         not null,
     last_update      date         not null,
     status           int          not null
@@ -26,13 +26,13 @@ create table if not exists product
 
 create table if not exists bill
 (
-    id               serial       not null primary key,
-    user_id          int          not null,
-    date_create      date         not null,
+    id                serial       not null primary key,
+    user_id           int          not null,
+    date_create       date         not null,
     recipient_name    varchar(250) not null,
     recipient_phone   varchar(250) not null,
     recipient_address varchar(250) not null,
-    status           int          not null,
+    status            int          not null,
     constraint bill_fk1 foreign key (user_id) references app_user (id)
 );
 
